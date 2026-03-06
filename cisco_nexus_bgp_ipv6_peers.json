@@ -180,7 +180,7 @@
       "maxDigits": 4,
       "description": "BGP peer FSM state. 1=idle, 2=connect, 3=active, 4=opensent, 5=openconfirm, 6=established",
       "interpretMethod": "none",
-      "threshold": "!= 6 6",
+      "threshold": ">= 2 && < 6",
       "type": "gauge",
       "clearInterval": 0,
       "min": "0",
