@@ -1,0 +1,411 @@
+{
+  "name": "Cisco_Nexus_BGP_IPv6",
+  "displayedAs": "Cisco Nexus BGP IPv6 Peers",
+  "description": "BGP IPv6 information for Cisco Nexus via CISCO-BGP4-MIB cbgpPeer2Table",
+  "appliesTo": "hasCategory(\"snmp\")",
+  "group": "",
+  "collectionMethod": "snmp",
+  "collectionInterval": "3m",
+  "dataSourceType": 1,
+  "multiInstance": true,
+  "useWildValueAsUniqueIdentifier": false,
+  "version": 1728423585,
+  "searchKeywords": "",
+  "type": 0,
+  "activeDiscovery": {
+    "deleteInactiveInstances": false,
+    "groupMethod": "none",
+    "discoveryMethod": "ad_snmp",
+    "autoDeleteInstances": true,
+    "disableDiscoveredInstances": false,
+    "filters": [],
+    "params": {
+      "descriptionOid": "1.3.6.1.4.1.9.9.187.1.2.5.1.3",
+      "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.3",
+      "ilp": [],
+      "discoveryType": "value"
+    },
+    "discoveryInterval": "1440m",
+    "enabled": true,
+    "showDeletedInstanceDays": 0
+  },
+  "datapoints": [
+    {
+      "max": "",
+      "triggerInterval": 5,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "Seconds this peer has been in Established state. Resets to 0 on session drop.",
+      "interpretMethod": "none",
+      "type": "gauge",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "EstablishedTime",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.19.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 1,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "BGP peer admin status. 1=stop, 2=start",
+      "interpretMethod": "none",
+      "threshold": "!= 2",
+      "type": "gauge",
+      "clearInterval": 0,
+      "min": "0",
+      "alertBody": "BGP IPv6 peer ##INSTANCE## on ##HOST## has been administratively stopped.",
+      "name": "AdminStatus",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.4.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 3,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "BGP UPDATE messages received from this peer (rate per interval)",
+      "interpretMethod": "none",
+      "type": "derive",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "InUpdates",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.10.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 3,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "BGP UPDATE messages sent to this peer (rate per interval)",
+      "interpretMethod": "none",
+      "type": "derive",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "OutUpdates",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.11.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 3,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "Total BGP messages received from this peer (rate per interval)",
+      "interpretMethod": "none",
+      "type": "derive",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "InTotalMessages",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.13.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 3,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "Total BGP messages sent to this peer (rate per interval)",
+      "interpretMethod": "none",
+      "type": "derive",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "OutTotalMessages",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.14.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 3,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "Number of times peer transitioned to Established. Rising value indicates session flaps.",
+      "interpretMethod": "none",
+      "threshold": "> 0",
+      "type": "derive",
+      "clearInterval": 0,
+      "min": "0",
+      "alertBody": "BGP IPv6 peer ##INSTANCE## on ##HOST## has flapped (delta=##VALUE##). Review BGP logs.",
+      "name": "FsmEstablishedTransitions",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.16.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 0,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "Alert if peer is Up and EstablishedTime < 60 minutes indicating a recent restart.",
+      "interpretMethod": "expression",
+      "threshold": "< 3600",
+      "interpretExpr": "if(eq(PeerState,6),EstablishedTime,3600)",
+      "type": "gauge",
+      "clearInterval": 3,
+      "min": "0",
+      "alertBody": "BGP IPv6 peer ##INSTANCE## on ##HOST## has recently restarted - only up ##VALUE## seconds.",
+      "name": "PeerRestart",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": ""
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 1,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "BGP peer FSM state. 1=idle, 2=connect, 3=active, 4=opensent, 5=openconfirm, 6=established",
+      "interpretMethod": "none",
+      "threshold": "!= 6 6",
+      "type": "gauge",
+      "clearInterval": 0,
+      "min": "0",
+      "alertBody": "BGP IPv6 peer ##INSTANCE## on ##HOST## is not Established (state=##VALUE##).\n1=idle, 2=connect, 3=active, 4=opensent, 5=openconfirm, 6=established.",
+      "name": "PeerState",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.3.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 0,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "Negotiated BGP hold time in seconds",
+      "interpretMethod": "none",
+      "type": "gauge",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "HoldTime",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.21.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 0,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "Negotiated BGP keepalive interval in seconds",
+      "interpretMethod": "none",
+      "type": "gauge",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "KeepAlive",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.5.1.22.##WILDVALUE##"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 0,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "IPv6 Unicast prefixes accepted from this peer (afi=2, safi=1)",
+      "interpretMethod": "none",
+      "type": "gauge",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "AcceptedPrefixes",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.8.1.1.##WILDVALUE##.2.1"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 3,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "IPv6 Unicast prefixes denied from this peer (afi=2, safi=1)",
+      "interpretMethod": "none",
+      "threshold": "> 0",
+      "type": "gauge",
+      "clearInterval": 0,
+      "min": "0",
+      "alertBody": "BGP IPv6 peer ##INSTANCE## on ##HOST## has ##VALUE## denied prefixes. Review inbound route policy.",
+      "name": "DeniedPrefixes",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.8.1.3.##WILDVALUE##.2.1"
+      },
+      "statusDisplayNames": []
+    },
+    {
+      "max": "",
+      "triggerInterval": 0,
+      "dataType": 7,
+      "maxDigits": 4,
+      "description": "Configured maximum prefix limit for IPv6 Unicast from this peer",
+      "interpretMethod": "none",
+      "type": "gauge",
+      "clearInterval": 0,
+      "min": "0",
+      "name": "PrefixAdminLimit",
+      "noData": "Do not trigger an alert",
+      "config": {
+        "oid": "1.3.6.1.4.1.9.9.187.1.2.8.1.4.##WILDVALUE##.2.1"
+      },
+      "statusDisplayNames": []
+    }
+  ],
+  "graphs": [
+    {
+      "datapoints": [
+        {
+          "datapointName": "InUpdates",
+          "consolidationFn": "max",
+          "name": "InUpdates"
+        },
+        {
+          "datapointName": "OutUpdates",
+          "consolidationFn": "max",
+          "name": "OutUpdates"
+        }
+      ],
+      "min": 0,
+      "timeScale": "day",
+      "name": "BGP Update Messages",
+      "verticalLabel": "Updates/sec",
+      "displayPriority": 1,
+      "scale1024": false,
+      "title": "BGP IPv6 Peer Updates for ##INSTANCE##",
+      "rigid": false,
+      "lines": [
+        {
+          "datapointName": "InUpdates",
+          "color": "teal",
+          "legend": "In",
+          "isVirtual": false,
+          "type": "line"
+        },
+        {
+          "datapointName": "OutUpdates",
+          "color": "blue",
+          "legend": "Out",
+          "isVirtual": false,
+          "type": "line"
+        }
+      ]
+    },
+    {
+      "datapoints": [
+        {
+          "datapointName": "AcceptedPrefixes",
+          "consolidationFn": "max",
+          "name": "AcceptedPrefixes"
+        },
+        {
+          "datapointName": "DeniedPrefixes",
+          "consolidationFn": "max",
+          "name": "DeniedPrefixes"
+        }
+      ],
+      "min": 0,
+      "timeScale": "day",
+      "name": "BGP IPv6 Prefix Counts",
+      "verticalLabel": "Prefixes",
+      "displayPriority": 2,
+      "scale1024": false,
+      "title": "BGP IPv6 Unicast Prefix Counts for ##INSTANCE##",
+      "rigid": false,
+      "lines": [
+        {
+          "datapointName": "AcceptedPrefixes",
+          "color": "green",
+          "legend": "Accepted",
+          "isVirtual": false,
+          "type": "area"
+        },
+        {
+          "datapointName": "DeniedPrefixes",
+          "color": "red",
+          "legend": "Denied",
+          "isVirtual": false,
+          "type": "line"
+        }
+      ]
+    },
+    {
+      "datapoints": [
+        {
+          "datapointName": "EstablishedTime",
+          "consolidationFn": "max",
+          "name": "EstablishedTime"
+        },
+        {
+          "datapointName": "HoldTime",
+          "consolidationFn": "max",
+          "name": "HoldTime"
+        },
+        {
+          "datapointName": "KeepAlive",
+          "consolidationFn": "max",
+          "name": "KeepAlive"
+        }
+      ],
+      "min": 0,
+      "timeScale": "day",
+      "name": "BGP Session Timers",
+      "verticalLabel": "Seconds",
+      "displayPriority": 3,
+      "scale1024": false,
+      "title": "BGP IPv6 Session Timers for ##INSTANCE##",
+      "rigid": false,
+      "lines": [
+        {
+          "datapointName": "EstablishedTime",
+          "color": "blue",
+          "legend": "Time Established",
+          "isVirtual": false,
+          "type": "area"
+        },
+        {
+          "datapointName": "HoldTime",
+          "color": "orange",
+          "legend": "Hold Time",
+          "isVirtual": false,
+          "type": "line"
+        },
+        {
+          "datapointName": "KeepAlive",
+          "color": "purple",
+          "legend": "Keepalive",
+          "isVirtual": false,
+          "type": "line"
+        }
+      ]
+    }
+  ]
+}
